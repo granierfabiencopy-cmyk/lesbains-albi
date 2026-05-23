@@ -130,9 +130,9 @@ h1 em{font-style:italic;color:var(--accent-warm);}
   display:block;
 }
 
-/* SECTION TEMOIGNAGE — fond brun chaud */
+/* SECTION TEMOIGNAGE — fond clair */
 .section-dark{
-  background:#3d332d;
+  background:var(--bg);
   padding:80px 24px;
 }
 .section-dark .section-inner{
@@ -157,7 +157,7 @@ h1 em{font-style:italic;color:var(--accent-warm);}
   font-family:var(--font-heading);
   font-size:clamp(17px, 3vw, 20px);
   line-height:1.6;
-  color:#ffffff;
+  color:var(--text);
   font-style:italic;
   margin-bottom:24px;
   text-align:center;
@@ -167,25 +167,17 @@ h1 em{font-style:italic;color:var(--accent-warm);}
   font-family:var(--font-body);
   font-size:13px;
   font-weight:700;
-  color:#d4c4b4;
+  color:var(--text-soft);
   text-align:center;
   letter-spacing:0.3px;
 }
 
-/* SECTION FINALE — photo sauna en fond */
+/* SECTION FINALE — fond sombre */
 .section-warm{
-  background:url('bain.png') center/cover no-repeat;
-  position:relative;
+  background:#1a1a1a;
   padding:80px 24px;
   text-align:center;
 }
-.section-warm::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:rgba(26,26,26,.7);
-}
-.section-warm>*{position:relative;z-index:1;}
 .section-warm .section-inner{
   max-width:480px;
 }
@@ -286,7 +278,12 @@ h1 em{font-style:italic;color:var(--accent-warm);}
 </div>
 
 
-<!-- TÉMOIGNAGE — fond sombre, large, impactant -->
+<!-- PHOTO — bains froids -->
+<div class="photo-break">
+  <img src="bain.png" alt="Bains froids — Les Bains Albi" loading="lazy">
+</div>
+
+<!-- TÉMOIGNAGE — fond clair -->
 <div class="section-dark">
   <div class="section-inner">
     <p class="testimonial-label">Ils l'ont déjà testé</p>
