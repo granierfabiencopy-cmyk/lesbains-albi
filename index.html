@@ -172,12 +172,20 @@ h1 em{font-style:italic;color:var(--accent-warm);}
   letter-spacing:0.3px;
 }
 
-/* SECTION FINALE — fond warm */
+/* SECTION FINALE — photo sauna en fond */
 .section-warm{
-  background:var(--bg-warm);
+  background:url('sauna.png') center/cover no-repeat;
+  position:relative;
   padding:80px 24px;
   text-align:center;
 }
+.section-warm::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:rgba(26,26,26,.7);
+}
+.section-warm>*{position:relative;z-index:1;}
 .section-warm .section-inner{
   max-width:480px;
 }
@@ -185,35 +193,34 @@ h1 em{font-style:italic;color:var(--accent-warm);}
   font-family:var(--font-heading);
   font-size:clamp(20px, 4vw, 26px);
   font-weight:700;
-  color:var(--text);
+  color:var(--text-on-dark);
   line-height:1.3;
   margin-bottom:14px;
 }
 .section-warm p{
   font-size:14px;
-  color:var(--text-soft);
+  color:var(--text-soft-on-dark);
   margin-bottom:24px;
   line-height:1.7;
 }
 .section-warm .form-row input{
-  background:var(--bg-card);
-  border:1.5px solid var(--border);
+  background:rgba(255,255,255,.95);
+  border:none;
 }
 .section-warm .form-row input:focus{
-  border-color:var(--accent-warm);
-  box-shadow:0 0 0 3px rgba(184,144,108,.15);
+  box-shadow:0 0 0 3px rgba(184,144,108,.3);
 }
 .section-warm .form-note{
-  color:var(--text-muted);
-  opacity:1;
+  color:var(--text-soft-on-dark);
+  opacity:.7;
 }
 .section-warm .form-success{
-  background:var(--bg-card);
-  backdrop-filter:none;
-  border:1px solid var(--border);
+  background:rgba(255,255,255,.1);
+  backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.15);
 }
 .section-warm .form-success p{
-  color:var(--text-soft);
+  color:var(--text-on-dark);
 }
 
 .urgency-note{display:inline-block;font-size:12px;font-weight:700;color:var(--accent-warm);letter-spacing:0.5px;margin-bottom:20px;padding:6px 16px;background:var(--accent-warm-glow);border:1px solid rgba(184,144,108,.2);border-radius:20px;}
