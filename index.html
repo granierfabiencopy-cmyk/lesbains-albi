@@ -109,6 +109,12 @@ h1 em{font-style:italic;color:var(--accent-warm);}
   font-weight:700;
 }
 
+/* Bénéfices : lignes serrées dans un bloc, espace entre blocs */
+.benefit-bloc{margin-bottom:28px;}
+.benefit-bloc:last-child{margin-bottom:0;}
+.benefit-bloc p{margin-bottom:4px;}
+.benefit-bloc p:last-child{margin-bottom:0;}
+
 /* PHOTO BREAK — image pleine largeur */
 .photo-break{
   width:100%;
@@ -252,17 +258,23 @@ h1 em{font-style:italic;color:var(--accent-warm);}
 <!-- BÉNÉFICES — texte en fil, fond warm -->
 <div class="section-light" style="background:var(--bg-warm);">
   <div class="section-inner">
-    <p><strong>Moins de courbatures, moins de raideurs au réveil.</strong></p>
-    <p>L'alternance froid-chaud accélère la récupération après l'effort.</p>
-    <p>Les athlètes professionnels utilisent ce principe depuis 20 ans pour retrouver leurs jambes plus vite.</p>
+    <div class="benefit-bloc">
+      <p><strong>Moins de courbatures, moins de raideurs au réveil.</strong></p>
+      <p>L'alternance froid-chaud accélère la récupération après l'effort.</p>
+      <p>Les athlètes professionnels utilisent ce principe depuis 20 ans pour retrouver leurs jambes plus vite.</p>
+    </div>
 
-    <p><strong>Vos tensions musculaires se relâchent sans forcer.</strong></p>
-    <p>Pas de médicaments, pas de massage.</p>
-    <p>Le contraste entre le froid et le chaud fait le travail sur vos muscles et vos articulations, séance après séance.</p>
+    <div class="benefit-bloc">
+      <p><strong>Vos tensions musculaires se relâchent sans forcer.</strong></p>
+      <p>Pas de médicaments, pas de massage.</p>
+      <p>Le contraste entre le froid et le chaud fait le travail sur vos muscles et vos articulations, séance après séance.</p>
+    </div>
 
-    <p><strong>Un stress qui redescend, un sommeil qui revient.</strong></p>
-    <p>Quand votre corps alterne entre 12°C et 80°C, il apprend à se relâcher vraiment.</p>
-    <p>Et ça se ressent dès le soir même.</p>
+    <div class="benefit-bloc">
+      <p><strong>Un stress qui redescend, un sommeil qui revient.</strong></p>
+      <p>Quand votre corps alterne entre 12°C et 80°C, il apprend à se relâcher vraiment.</p>
+      <p>Et ça se ressent dès le soir même.</p>
+    </div>
   </div>
 </div>
 
