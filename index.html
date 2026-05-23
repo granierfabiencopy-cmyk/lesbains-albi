@@ -13,9 +13,12 @@
   --bg: #faf8f5;
   --bg-card: #ffffff;
   --bg-warm: #f3efe9;
+  --bg-dark: #1a1a1a;
   --text: #1a1a1a;
   --text-soft: #4a4a4a;
   --text-muted: #8a8580;
+  --text-on-dark: #f5f0eb;
+  --text-soft-on-dark: #c4b9ad;
   --accent: #1a1a1a;
   --accent-hover: #333;
   --accent-warm: #b8906c;
@@ -32,31 +35,48 @@
 html{scroll-behavior:smooth;}
 body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 
-/* HERO */
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px 40px;position:relative;}
+/* HERO — photo pleine largeur avec overlay */
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:60px 24px 40px;
+  background:url('sauna.png') center/cover no-repeat;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg, rgba(26,26,26,.55) 0%, rgba(26,26,26,.75) 100%);
+}
+.hero>*{position:relative;z-index:1;}
 
-.logo-fallback{width:110px;height:110px;border-radius:50%;background:var(--text);display:flex;align-items:center;justify-content:center;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--bg);text-align:center;line-height:1.3;letter-spacing:1px;margin-bottom:28px;}
+.logo-fallback{width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border:1.5px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-family:var(--font-heading);font-size:11px;font-weight:700;color:var(--text-on-dark);text-align:center;line-height:1.3;letter-spacing:1px;margin-bottom:28px;}
 
 .pre-headline{font-family:var(--font-body);font-size:13px;font-weight:600;color:var(--accent-warm);letter-spacing:0.3px;margin-bottom:16px;max-width:480px;line-height:1.6;}
 
-h1{font-family:var(--font-heading);font-size:clamp(26px,5.5vw,42px);font-weight:700;line-height:1.2;color:var(--text);margin-bottom:16px;max-width:580px;}
+h1{font-family:var(--font-heading);font-size:clamp(26px,5.5vw,42px);font-weight:700;line-height:1.2;color:var(--text-on-dark);margin-bottom:16px;max-width:580px;}
 h1 em{font-style:italic;color:var(--accent-warm);}
 
-.sub{font-size:15px;line-height:1.7;color:var(--text-soft);max-width:460px;margin:0 auto 32px;}
+.sub{font-size:15px;line-height:1.7;color:var(--text-soft-on-dark);max-width:460px;margin:0 auto 32px;}
 
 /* FORM */
 .form-wrap{width:100%;max-width:420px;}
 .form-row{display:flex;gap:8px;}
-.form-row input{flex:1;padding:14px 16px;background:var(--bg-card);border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:var(--font-body);font-size:14px;color:var(--text);transition:all .2s;-webkit-appearance:none;}
+.form-row input{flex:1;padding:14px 16px;background:rgba(255,255,255,.95);border:none;border-radius:var(--radius-sm);font-family:var(--font-body);font-size:14px;color:var(--text);transition:all .2s;-webkit-appearance:none;}
 .form-row input::placeholder{color:var(--text-muted);}
-.form-row input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(26,26,26,.06);}
-.form-row button{padding:14px 24px;background:var(--accent);color:var(--bg);border:none;border-radius:var(--radius-sm);font-family:var(--font-body);font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap;}
-.form-row button:hover{background:var(--accent-hover);transform:translateY(-1px);}
+.form-row input:focus{outline:none;box-shadow:0 0 0 3px rgba(184,144,108,.3);}
+.form-row button{padding:14px 24px;background:var(--accent-warm);color:#fff;border:none;border-radius:var(--radius-sm);font-family:var(--font-body);font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.form-row button:hover{background:var(--accent-warm-hover);transform:translateY(-1px);}
 .form-row button:disabled{opacity:.5;cursor:not-allowed;transform:none;}
-.form-note{font-size:11px;color:var(--text-muted);margin-top:10px;}
-.form-success{display:none;text-align:center;padding:20px;background:var(--bg-warm);border:1px solid var(--border);border-radius:var(--radius-sm);}
-.form-success p{font-size:14px;color:var(--text-soft);line-height:1.6;}
-.form-success strong{color:var(--text);}
+.form-note{font-size:11px;color:var(--text-soft-on-dark);margin-top:10px;opacity:.7;}
+.form-success{display:none;text-align:center;padding:20px;background:rgba(255,255,255,.1);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);border-radius:var(--radius-sm);}
+.form-success p{font-size:14px;color:var(--text-on-dark);line-height:1.6;}
+.form-success strong{color:#fff;}
 
 @media(max-width:500px){
   .form-row{flex-direction:column;}
@@ -66,58 +86,139 @@ h1 em{font-style:italic;color:var(--accent-warm);}
 /* COUNTER */
 .counter{display:flex;justify-content:center;gap:18px;margin-top:20px;margin-bottom:10px;}
 .counter-item{text-align:center;}
-.counter-value{font-family:var(--font-heading);font-size:20px;font-weight:700;color:var(--text);}
-.counter-label{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
+.counter-value{font-family:var(--font-heading);font-size:20px;font-weight:700;color:var(--text-on-dark);}
+.counter-label{font-size:10px;color:var(--text-soft-on-dark);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
 
-/* SECTION */
-.section{padding:60px 24px;max-width:640px;margin:0 auto;}
+/* SECTION TEXTE — fond clair */
+.section-light{
+  background:var(--bg);
+  padding:80px 24px;
+}
+.section-inner{
+  max-width:600px;
+  margin:0 auto;
+}
+.section-inner p{
+  font-size:15px;
+  line-height:1.8;
+  color:var(--text-soft);
+  margin-bottom:16px;
+}
+.section-inner p strong{
+  color:var(--text);
+  font-weight:700;
+}
 
-.divider{height:1px;background:var(--border-light);margin:0 auto;max-width:300px;}
+/* PHOTO BREAK — image pleine largeur */
+.photo-break{
+  width:100%;
+  height:50vh;
+  min-height:320px;
+  max-height:500px;
+  overflow:hidden;
+}
+.photo-break img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
 
-/* BLOCS */
-.bloc{padding:40px 0;}
-.bloc p{font-size:14px;line-height:1.7;color:var(--text-soft);margin-bottom:12px;}
+/* SECTION TEMOIGNAGE — fond sombre */
+.section-dark{
+  background:var(--bg-dark);
+  padding:80px 24px;
+}
+.section-dark .section-inner{
+  max-width:560px;
+}
 
-/* BENEFITS */
-.benefits{list-style:none;text-align:left;max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:14px;}
-.benefits li{font-size:14px;line-height:1.6;color:var(--text-soft);padding-left:28px;position:relative;}
-.benefits li::before{content:'';position:absolute;left:0;top:6px;width:16px;height:16px;border-radius:50%;background:var(--accent-warm);opacity:.15;}
-.benefits li::after{content:'';position:absolute;left:4px;top:10px;width:8px;height:5px;border-left:2px solid var(--accent-warm);border-bottom:2px solid var(--accent-warm);transform:rotate(-45deg);}
-.benefits li strong{color:var(--text);font-weight:700;}
+.testimonial-label{
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--accent-warm);
+  margin-bottom:28px;
+  text-align:center;
+}
 
-/* RHETORICAL */
-.rhetorical{text-align:center;max-width:500px;margin:0 auto;padding:60px 24px;}
-.rhetorical h2{font-family:var(--font-heading);font-size:22px;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:14px;}
-.rhetorical p{font-size:14px;line-height:1.7;color:var(--text-soft);margin-bottom:24px;}
+.testimonial-text{
+  font-family:var(--font-heading);
+  font-size:clamp(17px, 3vw, 20px);
+  line-height:1.6;
+  color:var(--text-on-dark);
+  font-style:italic;
+  margin-bottom:24px;
+  text-align:center;
+}
 
-/* TESTIMONIAL */
-.testimonials{max-width:520px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;gap:20px;}
-.testimonial{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:0 1px 4px rgba(0,0,0,.03);}
-.testimonial blockquote{font-size:14px;line-height:1.7;color:var(--text-soft);font-style:italic;margin-bottom:12px;}
-.testimonial .author{font-size:12px;font-weight:700;color:var(--text);letter-spacing:0.3px;}
+.testimonial-author{
+  font-family:var(--font-body);
+  font-size:13px;
+  font-weight:700;
+  color:var(--text-soft-on-dark);
+  text-align:center;
+  letter-spacing:0.3px;
+}
 
-/* MID CTA */
-.mid-cta{text-align:center;padding:40px 24px;max-width:420px;margin:0 auto;}
+/* SECTION FINALE — fond warm */
+.section-warm{
+  background:var(--bg-warm);
+  padding:80px 24px;
+  text-align:center;
+}
+.section-warm .section-inner{
+  max-width:480px;
+}
+.section-warm h2{
+  font-family:var(--font-heading);
+  font-size:clamp(20px, 4vw, 26px);
+  font-weight:700;
+  color:var(--text);
+  line-height:1.3;
+  margin-bottom:14px;
+}
+.section-warm p{
+  font-size:14px;
+  color:var(--text-soft);
+  margin-bottom:24px;
+  line-height:1.7;
+}
+.section-warm .form-row input{
+  background:var(--bg-card);
+  border:1.5px solid var(--border);
+}
+.section-warm .form-row input:focus{
+  border-color:var(--accent-warm);
+  box-shadow:0 0 0 3px rgba(184,144,108,.15);
+}
+.section-warm .form-note{
+  color:var(--text-muted);
+  opacity:1;
+}
+.section-warm .form-success{
+  background:var(--bg-card);
+  backdrop-filter:none;
+  border:1px solid var(--border);
+}
+.section-warm .form-success p{
+  color:var(--text-soft);
+}
 
-/* FINAL CTA */
-.final-cta{text-align:center;padding:60px 24px 40px;max-width:500px;margin:0 auto;}
-.final-cta h2{font-family:var(--font-heading);font-size:22px;font-weight:700;color:var(--text);margin-bottom:10px;}
-.final-cta p{font-size:14px;color:var(--text-soft);margin-bottom:24px;line-height:1.6;}
-
-/* URGENCY */
-.urgency-note{display:inline-block;font-size:12px;font-weight:700;color:var(--accent-warm);letter-spacing:0.5px;margin-bottom:16px;padding:6px 16px;background:var(--accent-warm-glow);border:1px solid rgba(184,144,108,.2);border-radius:20px;}
+.urgency-note{display:inline-block;font-size:12px;font-weight:700;color:var(--accent-warm);letter-spacing:0.5px;margin-bottom:20px;padding:6px 16px;background:var(--accent-warm-glow);border:1px solid rgba(184,144,108,.2);border-radius:20px;}
 
 /* FOOTER */
-.footer{text-align:center;padding:24px;border-top:1px solid var(--border-light);}
+.footer{text-align:center;padding:24px;background:var(--bg);border-top:1px solid var(--border-light);}
 .footer p{font-size:11px;color:var(--text-muted);line-height:1.8;}
 .footer a{color:var(--text);text-decoration:none;font-weight:600;}
 .footer a:hover{color:var(--accent-warm);}
-.legal{font-size:10px;color:var(--text-muted);max-width:500px;margin:0 auto;padding:0 24px 24px;text-align:center;line-height:1.6;opacity:.7;}
+.legal{font-size:10px;color:var(--text-muted);max-width:500px;margin:0 auto;padding:0 24px 24px;text-align:center;line-height:1.6;opacity:.7;background:var(--bg);}
 </style>
 </head>
 <body>
 
-<!-- HERO : pre-headline persona + headline transformation + sub mécanisme + form -->
+<!-- HERO — photo sauna + texte en overlay -->
 <div class="hero">
   <div class="logo-fallback">LES BAINS<br>ALBI</div>
 
@@ -132,7 +233,7 @@ h1 em{font-style:italic;color:var(--accent-warm);}
       <input type="email" id="email-input" placeholder="Votre email" required>
       <button id="submit-btn" onclick="subscribe()">Je veux l'offre de lancement</button>
     </div>
-    <p class="form-note">En vous inscrivant, vous acceptez de recevoir des emails de Les Bains Albi.<br>Désinscription en un clic.</p>
+    <p class="form-note">En vous inscrivant, vous acceptez de recevoir des emails de Les Bains Albi. Désinscription en un clic.</p>
   </div>
   <div class="form-success" id="form-success">
     <p><strong>C'est noté.</strong><br>Vous recevrez l'offre de lancement en avant-première, avant l'ouverture au public.</p>
@@ -143,70 +244,61 @@ h1 em{font-style:italic;color:var(--accent-warm);}
   </div>
 </div>
 
-<div class="divider"></div>
+<!-- BÉNÉFICES — texte en fil, pas de liste à puces -->
+<div class="section-light">
+  <div class="section-inner">
+    <p><strong>Moins de courbatures, moins de raideurs au réveil.</strong>
+    L'alternance froid-chaud accélère la récupération après l'effort.
+    Les athlètes professionnels utilisent ce principe depuis 20 ans pour retrouver leurs jambes plus vite.</p>
 
-<!-- BÉNÉFICES (après le form, comme le modèle Copy Camp) -->
-<div class="section">
-  <div class="bloc" style="padding-top:20px;">
-    <p style="text-align:center;font-size:15px;font-weight:600;color:var(--text);margin-bottom:24px;">En vous inscrivant, vous saurez :</p>
+    <p><strong>Vos tensions musculaires se relâchent sans forcer.</strong>
+    Pas de médicaments, pas de massage.
+    Le contraste entre le froid et le chaud fait le travail sur vos muscles et vos articulations, séance après séance.</p>
 
-    <ul class="benefits">
-      <li><strong>Comment récupérer plus vite après l'effort</strong>, avec moins de courbatures et de raideurs le lendemain, grâce à l'alternance froid-chaud que les athlètes pro utilisent depuis 20 ans.</li>
-      <li><strong>Comment relâcher les tensions que vous accumulez chaque semaine</strong>, sans médicaments, sans massage, juste en laissant le contraste thermique faire le travail sur vos muscles et vos articulations.</li>
-      <li><strong>Comment retrouver un sommeil plus profond et un stress qui redescend</strong>, parce que votre corps apprend à se relâcher vraiment quand il alterne entre le froid et le chaud.</li>
-    </ul>
+    <p><strong>Un stress qui redescend, un sommeil qui revient.</strong>
+    Quand votre corps alterne entre 12°C et 80°C, il apprend à se relâcher vraiment.
+    Et ça se ressent dès le soir même.</p>
   </div>
 </div>
 
-<div class="divider"></div>
+<!-- PHOTO — bains froids -->
+<div class="photo-break">
+  <img src="bain.png" alt="Bains froids — Les Bains Albi" loading="lazy">
+</div>
 
-<!-- QUESTION RHÉTORIQUE (objection handler) -->
-<div class="rhetorical">
-  <h2>Pourquoi continuer à récupérer avec les moyens du bord...</h2>
-  <p>Un Doliprane, une nuit de sommeil en espérant que ça passe, un bain chaud qui soulage vingt minutes.<br>Alors qu'un protocole simple existe, qu'il est utilisé par des sportifs professionnels depuis des années, et qu'il arrive enfin à Albi ?</p>
+<!-- TÉMOIGNAGE — fond sombre, large, impactant -->
+<div class="section-dark">
+  <div class="section-inner">
+    <p class="testimonial-label">Ils l'ont déjà testé</p>
 
-  <div class="form-wrap" id="form-wrap-mid" style="margin:0 auto;">
-    <div class="form-row">
-      <input type="email" id="email-input-mid" placeholder="Votre email" required>
-      <button id="submit-btn-mid" onclick="subscribeMid()">Je veux l'offre de lancement</button>
-    </div>
-  </div>
-  <div class="form-success" id="form-success-mid" style="display:none;">
-    <p><strong>C'est noté.</strong><br>On vous écrit dès que c'est prêt.</p>
+    <p class="testimonial-text">"J'appréhendais vraiment le premier bain froid.<br>
+    Mais après ma première immersion, il me tardait d'y retourner.<br>
+    Pendant deux minutes dans l'eau froide, tu ne penses plus à rien.<br>
+    En sortant, une sensation de bien-être que je n'arrive toujours pas à expliquer.<br>
+    Les jours qui ont suivi, pendant une semaine, j'ai essayé de la retrouver sous des douches froides.<br>
+    Impossible."</p>
+
+    <p class="testimonial-author">Fabien, 34 ans, basketteur</p>
   </div>
 </div>
 
-<div class="divider"></div>
+<!-- CTA FINAL — fond warm, un seul formulaire de clôture -->
+<div class="section-warm">
+  <div class="section-inner">
+    <div class="urgency-note">Ouverture septembre 2026</div>
+    <h2>Les premiers inscrits recevront un tarif de lancement réservé</h2>
+    <p>Avant l'ouverture au public, les inscrits passeront en premier.<br>Une seule condition : laisser votre email maintenant.</p>
 
-<!-- TÉMOIGNAGE -->
-<div class="section" style="padding-bottom:20px;">
-  <p style="text-align:center;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent-warm);margin-bottom:20px;">Ils l'ont déjà testé</p>
-
-  <div class="testimonials">
-    <div class="testimonial">
-      <blockquote>"J'appréhendais vraiment le premier bain froid.<br>Mais après ma première immersion, il me tardait d'y retourner.<br>Pendant deux minutes dans l'eau froide, tu ne penses plus à rien.<br>En sortant, une sensation de bien-être que je n'arrive toujours pas à expliquer.<br>Les jours qui ont suivi, pendant une semaine, j'ai essayé de la retrouver sous des douches froides.<br>Impossible."</blockquote>
-      <p class="author">Fabien, 34 ans, basketteur</p>
+    <div class="form-wrap" id="form-wrap-2" style="margin:0 auto;">
+      <div class="form-row">
+        <input type="email" id="email-input-2" placeholder="Votre email" required>
+        <button id="submit-btn-2" onclick="subscribe2()">Je veux l'offre de lancement</button>
+      </div>
+      <p class="form-note">En vous inscrivant, vous acceptez de recevoir des emails de Les Bains Albi. Désinscription en un clic.</p>
     </div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- CTA FINAL -->
-<div class="final-cta">
-  <div class="urgency-note">Ouverture septembre 2026</div>
-  <h2>Les premiers inscrits recevront un tarif de lancement réservé</h2>
-  <p>Avant l'ouverture au public, les inscrits passeront en premier.<br>Une seule condition : laisser votre email maintenant.</p>
-
-  <div class="form-wrap" id="form-wrap-2">
-    <div class="form-row">
-      <input type="email" id="email-input-2" placeholder="Votre email" required>
-      <button id="submit-btn-2" onclick="subscribe2()">Je veux l'offre de lancement</button>
+    <div class="form-success" id="form-success-2" style="display:none;">
+      <p><strong>C'est noté.</strong> On vous écrit dès que c'est prêt.</p>
     </div>
-    <p class="form-note">En vous inscrivant, vous acceptez de recevoir des emails de Les Bains Albi.<br>Désinscription en un clic.</p>
-  </div>
-  <div class="form-success" id="form-success-2" style="display:none;">
-    <p><strong>C'est noté.</strong> On vous écrit dès que c'est prêt.</p>
   </div>
 </div>
 
@@ -228,21 +320,9 @@ async function subscribe() {
   const email = input.value.trim().toLowerCase();
   if (!email || !email.includes('@')) { input.focus(); return; }
   btn.disabled = true; btn.textContent = '...';
-  if (sb) { await sb.from('subscribers').upsert({ email, source: 'landing-v2' }, { onConflict: 'email' }); }
+  if (sb) { await sb.from('subscribers').upsert({ email, source: 'landing-v3' }, { onConflict: 'email' }); }
   document.getElementById('form-wrap').style.display = 'none';
   document.getElementById('form-success').style.display = 'block';
-  updateCounter();
-}
-
-async function subscribeMid() {
-  const input = document.getElementById('email-input-mid');
-  const btn = document.getElementById('submit-btn-mid');
-  const email = input.value.trim().toLowerCase();
-  if (!email || !email.includes('@')) { input.focus(); return; }
-  btn.disabled = true; btn.textContent = '...';
-  if (sb) { await sb.from('subscribers').upsert({ email, source: 'landing-v2' }, { onConflict: 'email' }); }
-  document.getElementById('form-wrap-mid').style.display = 'none';
-  document.getElementById('form-success-mid').style.display = 'block';
   updateCounter();
 }
 
@@ -252,7 +332,7 @@ async function subscribe2() {
   const email = input.value.trim().toLowerCase();
   if (!email || !email.includes('@')) { input.focus(); return; }
   btn.disabled = true; btn.textContent = '...';
-  if (sb) { await sb.from('subscribers').upsert({ email, source: 'landing-v2' }, { onConflict: 'email' }); }
+  if (sb) { await sb.from('subscribers').upsert({ email, source: 'landing-v3' }, { onConflict: 'email' }); }
   document.getElementById('form-wrap-2').style.display = 'none';
   document.getElementById('form-success-2').style.display = 'block';
   updateCounter();
