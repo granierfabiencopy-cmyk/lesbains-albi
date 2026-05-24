@@ -293,6 +293,9 @@ h1 em{font-style:italic;color:var(--accent);}
   cursor:pointer;transition:all .2s;white-space:nowrap;
 }
 .popup-form button:hover{background:var(--accent-hover);transform:translateY(-1px);}
+.consent-label{display:flex;align-items:flex-start;gap:8px;font-size:11px;color:var(--text-muted);line-height:1.5;margin-top:12px;cursor:pointer;}
+.consent-label input{margin-top:2px;flex-shrink:0;}
+.consent-label a{color:var(--accent);text-decoration:underline;}
 .popup-note{font-size:11px;color:var(--text-muted);margin-top:10px;text-align:center;}
 .popup-success{text-align:center;display:none;}
 .popup-success p{font-size:15px;color:var(--text);line-height:1.6;}
@@ -490,6 +493,7 @@ h1 em{font-style:italic;color:var(--accent);}
         <input type="text" id="c-subject">
         <label for="c-message">Message *</label>
         <textarea id="c-message" required></textarea>
+        <label class="consent-label"><input type="checkbox" required> J'accepte que mes données soient utilisées pour répondre à ma demande. <a href="#mentions">Politique de confidentialité</a></label>
         <button type="submit">Envoyer</button>
       </form>
       <div class="contact-aside">
@@ -507,6 +511,27 @@ h1 em{font-style:italic;color:var(--accent);}
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- MENTIONS LÉGALES -->
+<section class="section" id="mentions" style="padding:60px 24px;">
+  <div class="section-inner" style="max-width:700px;">
+    <h2 style="font-size:22px;margin-bottom:24px;">Politique de confidentialité</h2>
+    <p><strong>Responsable du traitement</strong></p>
+    <p>Les Bains — Albi. Contact : contact@bains-albi.com</p>
+    <p><strong>Données collectées</strong></p>
+    <p>Adresse email (formulaire d'inscription) et nom, email, message (formulaire de contact).</p>
+    <p><strong>Finalités</strong></p>
+    <p>Vos données sont utilisées uniquement pour vous informer de l'ouverture et des offres de lancement (inscription) ou pour répondre à votre message (contact).</p>
+    <p><strong>Base légale</strong></p>
+    <p>Consentement explicite via case à cocher (article 6.1.a du RGPD).</p>
+    <p><strong>Durée de conservation</strong></p>
+    <p>Vos données sont conservées jusqu'à votre désinscription ou 3 ans après le dernier contact.</p>
+    <p><strong>Vos droits</strong></p>
+    <p>Vous pouvez accéder, rectifier ou supprimer vos données à tout moment en écrivant à contact@bains-albi.com.</p>
+    <p><strong>Hébergement</strong></p>
+    <p>Site hébergé par Vercel Inc. (San Francisco, CA). Données stockées par Supabase (hébergement UE).</p>
   </div>
 </section>
 
@@ -535,11 +560,14 @@ h1 em{font-style:italic;color:var(--accent);}
         <li>Tarif de lancement réservé aux inscrits</li>
         <li>Votre première séance offerte le jour de l'ouverture</li>
       </ul>
-      <form class="popup-form" onsubmit="popupSubmit(event)">
-        <input type="email" id="popup-email" placeholder="Votre email" required>
-        <button type="submit" id="popup-btn">Je m'inscris</button>
+      <form class="popup-form-wrap" onsubmit="popupSubmit(event)">
+        <div class="popup-form">
+          <input type="email" id="popup-email" placeholder="Votre email" required>
+          <button type="submit" id="popup-btn">Je m'inscris</button>
+        </div>
+        <label class="consent-label"><input type="checkbox" id="popup-consent" required> J'accepte de recevoir les informations de lancement par email. <a href="#mentions" onclick="hidePopup()">Politique de confidentialité</a></label>
       </form>
-      <p class="popup-note">Pas de spam. Juste les infos de lancement.</p>
+      <p class="popup-note">Pas de spam. Juste les infos de lancement. Désinscription en un clic.</p>
     </div>
     <div class="popup-success" id="popup-success">
       <span class="check">✓</span>
