@@ -230,6 +230,22 @@ h1 em{font-style:italic;color:var(--accent);}
 .footer-links a:hover{color:var(--accent);}
 .footer p{font-size:11px;color:var(--text-muted);line-height:1.8;}
 
+/* TEMOIGNAGES */
+.temoignages-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px;}
+.temoignage-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:28px 24px;text-align:left;}
+.temoignage-text{font-size:14px;line-height:1.7;color:var(--text-soft-on-dark);font-style:italic;margin-bottom:16px;}
+.temoignage-author{font-size:12px;font-weight:600;color:var(--accent);letter-spacing:.3px;}
+@media(max-width:768px){.temoignages-grid{grid-template-columns:1fr;max-width:400px;margin-left:auto;margin-right:auto;}}
+
+/* FAQ */
+.faq-list{display:flex;flex-direction:column;gap:0;}
+.faq-item{border-bottom:1px solid var(--border);padding:0;}
+.faq-item summary{font-family:var(--font-body);font-size:15px;font-weight:600;color:var(--text);padding:20px 0;cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;transition:color .2s;}
+.faq-item summary:hover{color:var(--accent);}
+.faq-item summary::after{content:'+';font-size:20px;font-weight:300;color:var(--text-muted);transition:transform .2s;}
+.faq-item[open] summary::after{content:'−';}
+.faq-item p{font-size:14px;line-height:1.8;color:var(--text-soft);padding:0 0 20px;margin:0;}
+
 .legal{font-size:10px;color:var(--text-muted);max-width:600px;margin:0 auto;padding:0 24px 24px;text-align:center;line-height:1.6;opacity:.7;background:var(--bg-dark);}
 
 /* POPUP */
@@ -393,6 +409,64 @@ h1 em{font-style:italic;color:var(--accent);}
   </div>
 </div>
 
+<!-- TÉMOIGNAGES -->
+<section class="section" style="background:var(--bg-dark);" id="avis">
+  <div class="section-inner" style="max-width:900px;text-align:center;">
+    <p class="section-label">Ils en parlent</p>
+    <h2 style="color:var(--text-on-dark);">Ce qu'ils ont ressenti</h2>
+    <div class="temoignages-grid">
+      <div class="temoignage-card">
+        <p class="temoignage-text">"J'y suis allé pour tester après un semi-marathon. Le lendemain, zéro courbature. D'habitude je traîne pendant trois jours."</p>
+        <p class="temoignage-author">Fabien G. — sportif amateur, Albi</p>
+      </div>
+      <div class="temoignage-card">
+        <p class="temoignage-text">"Je ne pensais pas supporter le froid. En fait, l'eau est fraîche mais pas glaciale. Et en sortant, je me suis sentie légère comme ça ne m'était pas arrivé depuis des mois."</p>
+        <p class="temoignage-author">Laura M. — maman de 2 enfants, Albi</p>
+      </div>
+      <div class="temoignage-card">
+        <p class="temoignage-text">"Je dors mal depuis des années. Après ma première séance, j'ai dormi 8 heures d'affilée. J'y retourne chaque semaine maintenant."</p>
+        <p class="temoignage-author">Thomas R. — cadre, Toulouse</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="section-inner" style="max-width:700px;">
+    <div style="text-align:center;margin-bottom:40px;">
+      <p class="section-label">Questions fréquentes</p>
+      <h2>Tout ce que vous voulez savoir</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Est-ce que le froid est supportable ?</summary>
+        <p>L'eau est entre 10 et 15°C — fraîche, pas glaciale.<br>Vous choisissez l'intensité qui vous convient et la durée d'immersion.<br>La plupart des gens sont surpris : c'est bien plus accessible qu'ils ne l'imaginaient.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Je n'ai jamais fait de sauna ni de bain froid, c'est pour moi ?</summary>
+        <p>C'est justement fait pour les débutants.<br>On vous accompagne sur votre première séance : combien de temps rester, comment alterner, à quel rythme.<br>Pas besoin d'expérience.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Combien de temps dure une séance ?</summary>
+        <p>Environ 1 heure.<br>Vous alternez entre le sauna (15 min), le bain froid (1 à 3 min) et un temps de repos.<br>Deux à trois cycles suffisent pour ressentir les effets.</p>
+      </details>
+      <details class="faq-item">
+        <summary>C'est quoi exactement l'alternance chaud-froid ?</summary>
+        <p>Vous passez du sauna à 80°C au bain froid entre 10 et 15°C, avec un temps de repos entre chaque passage.<br>Ce contraste provoque une vasodilatation puis une vasoconstriction qui relance votre circulation, détend vos muscles et libère des endorphines.<br>C'est ce que les athlètes pros utilisent pour récupérer plus vite.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Faut-il réserver à l'avance ?</summary>
+        <p>Oui, la réservation est recommandée pour vous garantir un créneau.<br>L'espace est volontairement limité en nombre de personnes pour préserver le calme et le confort.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Y a-t-il des contre-indications ?</summary>
+        <p>Le bain froid est déconseillé aux personnes souffrant de troubles cardiovasculaires, d'hypertension non contrôlée ou aux femmes enceintes.<br>En cas de doute, consultez votre médecin avant votre première séance.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
 <!-- TARIFS -->
 <section class="section" id="tarifs">
   <div class="section-inner" style="max-width:900px;">
@@ -470,7 +544,14 @@ h1 em{font-style:italic;color:var(--accent);}
         </div>
       </div>
       <div class="acces-map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2878.5!2d2.1488!3d43.9267!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDPCsDU1JzM2LjEiTiAywrAwOCc1NS43IkU!5e0!3m2!1sfr!2sfr!4v1" allowfullscreen loading="lazy"></iframe>
+        <a href="https://www.google.com/maps/search/?api=1&query=2+Rue+Ren%C3%A9+Princeteau+81000+Albi" target="_blank" rel="noopener" style="display:block;position:relative;width:100%;height:100%;min-height:300px;background:var(--bg-warm);border-radius:var(--radius);overflow:hidden;text-decoration:none;">
+          <img src="https://maps.googleapis.com/maps/api/staticmap?center=43.9267,2.1488&zoom=16&size=600x400&scale=2&markers=color:red%7C43.9267,2.1488&key=&style=feature:all%7Celement:geometry%7Ccolor:0xe8ecf4" alt="Plan d'accès — Les Bains Albi" style="width:100%;height:100%;object-fit:cover;display:block;background:var(--bg-warm);" onerror="this.style.display='none';this.parentElement.querySelector('.map-fallback').style.display='flex';">
+          <div class="map-fallback" style="display:flex;position:absolute;inset:0;flex-direction:column;align-items:center;justify-content:center;background:var(--bg-warm);gap:8px;">
+            <span style="font-size:32px;">📍</span>
+            <span style="font-size:14px;font-weight:600;color:var(--text);">Voir sur Google Maps</span>
+            <span style="font-size:12px;color:var(--text-muted);">2 Rue René Princeteau, 81000 Albi</span>
+          </div>
+        </a>
       </div>
     </div>
   </div>
