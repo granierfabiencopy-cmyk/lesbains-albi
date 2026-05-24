@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Les Bains — Albi · Bains froids & Sauna</title>
 <meta name="description" content="Bains froids et sauna à Albi. Le rituel chaud/froid qui soulage vos douleurs et coupe votre stress. Réservez votre séance.">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -230,6 +231,77 @@ h1 em{font-style:italic;color:var(--accent);}
 .footer p{font-size:11px;color:var(--text-muted);line-height:1.8;}
 
 .legal{font-size:10px;color:var(--text-muted);max-width:600px;margin:0 auto;padding:0 24px 24px;text-align:center;line-height:1.6;opacity:.7;background:var(--bg-dark);}
+
+/* POPUP */
+.popup-overlay{
+  position:fixed;inset:0;z-index:9999;
+  background:rgba(30,42,58,.7);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;visibility:hidden;
+  transition:all .4s ease;
+  padding:20px;
+}
+.popup-overlay.active{opacity:1;visibility:visible;}
+.popup{
+  background:#fff;
+  border-radius:var(--radius);
+  max-width:460px;width:100%;
+  padding:44px 36px 36px;
+  position:relative;
+  box-shadow:0 24px 60px rgba(0,0,0,.15);
+  transform:translateY(20px);
+  transition:transform .4s ease;
+}
+.popup-overlay.active .popup{transform:translateY(0);}
+.popup-close{
+  position:absolute;top:16px;right:16px;
+  width:32px;height:32px;
+  background:var(--bg);border:none;border-radius:50%;
+  font-size:18px;color:var(--text-muted);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;
+}
+.popup-close:hover{background:var(--border);color:var(--text);}
+.popup-badge{
+  display:inline-block;font-size:11px;font-weight:700;
+  color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;
+  margin-bottom:16px;
+}
+.popup h3{
+  font-family:var(--font-heading);
+  font-size:24px;font-weight:400;line-height:1.3;
+  color:var(--text);margin-bottom:14px;
+}
+.popup-benefits{list-style:none;margin:0 0 20px;padding:0;}
+.popup-benefits li{
+  font-size:14px;color:var(--text-soft);
+  padding:6px 0;display:flex;align-items:center;gap:10px;
+}
+.popup-benefits li::before{content:'✓';color:var(--accent);font-weight:700;font-size:14px;}
+.popup-form{display:flex;gap:8px;}
+.popup-form input{
+  flex:1;padding:14px 16px;
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  font-family:var(--font-body);font-size:14px;color:var(--text);
+}
+.popup-form input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(77,184,217,.15);}
+.popup-form button{
+  padding:14px 24px;background:var(--accent);color:#fff;
+  border:none;border-radius:var(--radius-sm);
+  font-family:var(--font-body);font-size:14px;font-weight:700;
+  cursor:pointer;transition:all .2s;white-space:nowrap;
+}
+.popup-form button:hover{background:var(--accent-hover);transform:translateY(-1px);}
+.popup-note{font-size:11px;color:var(--text-muted);margin-top:10px;text-align:center;}
+.popup-success{text-align:center;display:none;}
+.popup-success p{font-size:15px;color:var(--text);line-height:1.6;}
+.popup-success .check{font-size:40px;margin-bottom:12px;display:block;}
+@media(max-width:500px){
+  .popup{padding:32px 24px 28px;}
+  .popup-form{flex-direction:column;}
+  .popup h3{font-size:20px;}
+}
 </style>
 </head>
 <body>
@@ -451,11 +523,83 @@ h1 em{font-style:italic;color:var(--accent);}
 
 <p class="legal">Les bénéfices mentionnés s'appuient sur des méta-analyses et revues systématiques publiées dans des journaux à comité de lecture. Les résultats varient selon les individus et l'intensité de la pratique. Ce service ne remplace pas un avis médical. Consultez un professionnel de santé avant toute immersion en eau froide si vous souffrez de troubles cardiovasculaires, d'hypertension ou d'autres pathologies.</p>
 
+<!-- POPUP OPTIN -->
+<div class="popup-overlay" id="popup">
+  <div class="popup">
+    <button class="popup-close" id="popup-close">×</button>
+    <div id="popup-form-wrap">
+      <p class="popup-badge">Ouverture septembre 2026</p>
+      <h3>Les premiers inscrits passeront avant tout le monde</h3>
+      <ul class="popup-benefits">
+        <li>Accès en avant-première avant l'ouverture publique</li>
+        <li>Tarif de lancement réservé aux inscrits</li>
+        <li>Votre première séance offerte le jour de l'ouverture</li>
+      </ul>
+      <form class="popup-form" onsubmit="popupSubmit(event)">
+        <input type="email" id="popup-email" placeholder="Votre email" required>
+        <button type="submit" id="popup-btn">Je m'inscris</button>
+      </form>
+      <p class="popup-note">Pas de spam. Juste les infos de lancement.</p>
+    </div>
+    <div class="popup-success" id="popup-success">
+      <span class="check">✓</span>
+      <p><strong>Vous êtes sur la liste.</strong></p>
+      <p>On vous préviendra avant tout le monde.</p>
+    </div>
+  </div>
+</div>
+
 <script>
 // Nav scroll effect
 window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
 });
+
+// Supabase
+const SUPABASE_URL = 'https://luekvhkynpvlfdejizhz.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_bExpV0ZFCr_C0crqcun8lA_cCyDqZmc';
+const sb = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
+
+// Popup logic
+const popup = document.getElementById('popup');
+const popupClose = document.getElementById('popup-close');
+
+function showPopup() {
+  if (localStorage.getItem('popup-dismissed')) return;
+  popup.classList.add('active');
+}
+
+function hidePopup() {
+  popup.classList.remove('active');
+  localStorage.setItem('popup-dismissed', '1');
+}
+
+popupClose.addEventListener('click', hidePopup);
+popup.addEventListener('click', (e) => { if (e.target === popup) hidePopup(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hidePopup(); });
+
+// Affiche après 30s OU quand l'utilisateur a scrollé 60% de la page
+let popupShown = false;
+setTimeout(() => { if (!popupShown) { popupShown = true; showPopup(); } }, 30000);
+window.addEventListener('scroll', () => {
+  if (popupShown) return;
+  const scrollPct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+  if (scrollPct > 0.6) { popupShown = true; showPopup(); }
+});
+
+// Submit
+async function popupSubmit(e) {
+  e.preventDefault();
+  const input = document.getElementById('popup-email');
+  const btn = document.getElementById('popup-btn');
+  const email = input.value.trim().toLowerCase();
+  if (!email || !email.includes('@')) { input.focus(); return; }
+  btn.disabled = true; btn.textContent = '...';
+  if (sb) { await sb.from('subscribers').upsert({ email, source: 'vitrine-popup' }, { onConflict: 'email' }); }
+  document.getElementById('popup-form-wrap').style.display = 'none';
+  document.getElementById('popup-success').style.display = 'block';
+  setTimeout(hidePopup, 3000);
+}
 </script>
 </body>
 </html>
