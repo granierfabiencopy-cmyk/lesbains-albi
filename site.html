@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Les Bains — Albi · Bains froids & Sauna</title>
+<meta name="description" content="Bains froids et sauna à Albi. Le rituel chaud/froid qui soulage vos douleurs et coupe votre stress. Réservez votre séance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f0f2f8;
+  --bg-warm: #e8ecf4;
+  --bg-dark: #1e2a3a;
+  --bg-card: #ffffff;
+  --text: #1e2a3a;
+  --text-soft: #4a5568;
+  --text-muted: #8a94a6;
+  --text-on-dark: #f0f2f8;
+  --text-soft-on-dark: #b0bcd0;
+  --accent: #4db8d9;
+  --accent-hover: #3aa0c0;
+  --border: #d8dfe8;
+  --border-light: #e8ecf4;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --font-heading: 'DM Serif Display', Georgia, serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);overflow-x:hidden;}
+
+/* NAV */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 32px;
+  background:rgba(240,242,248,.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border-light);
+  transition:all .3s;
+}
+.nav.scrolled{background:rgba(240,242,248,.97);box-shadow:0 2px 20px rgba(0,0,0,.06);}
+.nav-logo{font-family:var(--font-heading);font-size:16px;font-weight:700;color:var(--text);text-decoration:none;letter-spacing:.5px;}
+.nav-links{display:flex;gap:28px;align-items:center;}
+.nav-links a{font-size:13px;font-weight:600;color:var(--text-soft);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--accent);}
+.nav-cta{padding:10px 20px;background:var(--accent);color:#fff !important;border-radius:var(--radius-sm);font-size:13px;font-weight:700;text-decoration:none;transition:all .2s;}
+.nav-cta:hover{background:var(--accent-hover);transform:translateY(-1px);}
+@media(max-width:700px){
+  .nav-links a:not(.nav-cta){display:none;}
+  .nav{padding:14px 20px;}
+}
+
+/* HERO — zoom effect */
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;
+  padding:100px 24px 60px;
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:url('sauna.png') center/cover no-repeat;
+  animation:heroZoom 20s ease-out forwards;
+  will-change:transform;
+}
+@keyframes heroZoom{
+  from{transform:scale(1.15);}
+  to{transform:scale(1);}
+}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(30,42,58,.45) 0%, rgba(30,42,58,.7) 100%);
+}
+.hero-content{position:relative;z-index:1;max-width:620px;}
+
+.hero-badge{display:inline-block;font-size:11px;font-weight:700;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:24px;padding:8px 18px;background:rgba(77,184,217,.12);border:1px solid rgba(77,184,217,.25);border-radius:24px;}
+
+h1{font-family:var(--font-heading);font-size:clamp(28px,5vw,42px);font-weight:400;line-height:1.2;color:var(--text-on-dark);margin-bottom:18px;letter-spacing:1px;}
+h1 em{font-style:italic;color:var(--accent);}
+
+.hero-sub{font-size:15px;line-height:1.7;color:var(--text-soft-on-dark);max-width:500px;margin:0 auto 32px;}
+.hero-cta{display:inline-block;padding:16px 36px;background:var(--accent);color:#fff;border-radius:var(--radius-sm);font-family:var(--font-body);font-size:15px;font-weight:700;text-decoration:none;transition:all .2s;}
+.hero-cta:hover{background:var(--accent-hover);transform:translateY(-2px);box-shadow:0 8px 24px rgba(77,184,217,.3);}
+
+/* SECTIONS */
+.section{padding:100px 24px;}
+.section-inner{max-width:720px;margin:0 auto;}
+
+.section-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:20px;}
+.section h2{font-family:var(--font-heading);font-size:clamp(24px,4vw,34px);font-weight:400;line-height:1.25;color:var(--text);margin-bottom:24px;}
+.section p{font-size:15px;line-height:1.8;color:var(--text-soft);margin-bottom:16px;}
+.section p strong{color:var(--text);font-weight:700;}
+
+/* MISSION — fond sombre */
+.section-dark{
+  background:var(--bg-dark);
+  position:relative;
+}
+.section-dark .section-label{color:var(--accent);}
+.section-dark h2{color:var(--text-on-dark);}
+.section-dark p{color:var(--text-soft-on-dark);}
+.section-dark p strong{color:var(--text-on-dark);}
+.section-dark .mission-quote{
+  font-family:var(--font-heading);
+  font-size:clamp(20px,3.5vw,28px);
+  line-height:1.4;
+  color:var(--text-on-dark);
+  font-style:italic;
+  text-align:center;
+  max-width:600px;
+  margin:0 auto 24px;
+}
+
+/* HISTOIRE */
+.histoire-text{max-width:640px;margin:0 auto;}
+
+/* SPLIT — image + texte côte à côte */
+.split{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  min-height:500px;
+}
+.split-img{overflow:hidden;}
+.split-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.split-text{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:60px 48px;
+}
+.split-text .section-label{margin-bottom:16px;}
+.split-text h2{font-family:var(--font-heading);font-size:clamp(22px,3.5vw,30px);font-weight:400;line-height:1.25;color:var(--text);margin-bottom:20px;}
+.split-text p{font-size:15px;line-height:1.8;color:var(--text-soft);margin-bottom:14px;}
+.split-text p strong{color:var(--text);font-weight:700;}
+.split-text .bienfaits{list-style:none;margin:20px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;}
+.split-text .bienfaits li{font-size:13px;color:var(--text-soft);padding:8px 0;border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:8px;}
+.split-text .bienfaits li::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%;flex-shrink:0;}
+.split.reverse .split-img{order:2;}
+.split.reverse .split-text{order:1;}
+.split.bg-warm{background:var(--bg-warm);}
+@media(max-width:768px){
+  .split{grid-template-columns:1fr;}
+  .split-img{max-height:300px;}
+  .split.reverse .split-img{order:0;}
+  .split.reverse .split-text{order:1;}
+  .split-text{padding:40px 24px;}
+  .split-text .bienfaits{grid-template-columns:1fr;}
+}
+
+/* TARIFS */
+.tarifs-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  margin-top:40px;
+}
+.tarif-card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:36px 28px;
+  text-align:center;
+  transition:all .2s;
+}
+.tarif-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.06);}
+.tarif-card.featured{border-color:var(--accent);position:relative;}
+.tarif-card.featured::after{content:'Populaire';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:12px;letter-spacing:.5px;}
+.tarif-name{font-family:var(--font-heading);font-size:18px;margin-bottom:8px;}
+.tarif-price{font-family:var(--font-heading);font-size:36px;color:var(--accent);margin-bottom:4px;}
+.tarif-price span{font-size:14px;font-weight:400;color:var(--text-muted);}
+.tarif-desc{font-size:13px;color:var(--text-muted);margin-bottom:20px;line-height:1.6;}
+.tarif-features{list-style:none;text-align:left;margin-bottom:24px;}
+.tarif-features li{font-size:13px;color:var(--text-soft);padding:8px 0;border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:8px;}
+.tarif-features li::before{content:'✓';color:var(--accent);font-weight:700;font-size:14px;}
+.tarif-btn{display:block;width:100%;padding:12px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius-sm);font-family:var(--font-body);font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none;text-align:center;}
+.tarif-btn:hover{background:var(--accent-hover);transform:translateY(-1px);}
+.tarif-btn.outline{background:transparent;border:2px solid var(--border);color:var(--text);}
+.tarif-btn.outline:hover{border-color:var(--accent);color:var(--accent);}
+@media(max-width:768px){
+  .tarifs-grid{grid-template-columns:1fr;max-width:360px;margin-left:auto;margin-right:auto;}
+}
+
+/* ACCES */
+.acces-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  margin-top:40px;
+}
+.acces-item{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px;}
+.acces-item-icon{font-size:18px;flex-shrink:0;margin-top:2px;}
+.acces-item p{font-size:14px;color:var(--text-soft);line-height:1.6;margin:0;}
+.acces-item strong{color:var(--text);font-weight:700;display:block;margin-bottom:2px;font-size:12px;letter-spacing:1px;text-transform:uppercase;}
+.horaires{margin-top:24px;}
+.horaires-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border-light);font-size:14px;color:var(--text-soft);}
+.horaires-row span:first-child{font-weight:600;color:var(--text);}
+.acces-map{border-radius:var(--radius);overflow:hidden;min-height:300px;background:var(--bg-warm);}
+.acces-map iframe{width:100%;height:100%;min-height:300px;border:0;}
+@media(max-width:768px){
+  .acces-grid{grid-template-columns:1fr;}
+}
+
+/* CONTACT FORM */
+.contact-grid{display:grid;grid-template-columns:2fr 1fr;gap:40px;margin-top:40px;}
+.contact-form label{display:block;font-size:12px;font-weight:700;color:var(--text);letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px;}
+.contact-form input,
+.contact-form textarea{width:100%;padding:14px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);font-family:var(--font-body);font-size:14px;color:var(--text);margin-bottom:16px;transition:all .2s;-webkit-appearance:none;resize:vertical;}
+.contact-form input:focus,
+.contact-form textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(77,184,217,.15);}
+.contact-form textarea{min-height:120px;}
+.contact-form button{width:100%;padding:14px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius-sm);font-family:var(--font-body);font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;}
+.contact-form button:hover{background:var(--accent-hover);transform:translateY(-1px);}
+.contact-aside p{font-size:14px;color:var(--text-soft);line-height:1.6;margin-bottom:16px;}
+.contact-aside strong{color:var(--text);font-weight:700;display:block;margin-bottom:4px;font-size:12px;letter-spacing:1px;text-transform:uppercase;}
+.contact-aside a{color:var(--accent);text-decoration:none;}
+@media(max-width:768px){
+  .contact-grid{grid-template-columns:1fr;}
+}
+
+/* FOOTER */
+.footer{text-align:center;padding:40px 24px;background:var(--bg-dark);}
+.footer-logo{font-family:var(--font-heading);font-size:16px;color:var(--text-on-dark);margin-bottom:16px;}
+.footer-links{display:flex;justify-content:center;gap:24px;margin-bottom:16px;}
+.footer-links a{font-size:13px;color:var(--text-soft-on-dark);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:var(--accent);}
+.footer p{font-size:11px;color:var(--text-muted);line-height:1.8;}
+
+.legal{font-size:10px;color:var(--text-muted);max-width:600px;margin:0 auto;padding:0 24px 24px;text-align:center;line-height:1.6;opacity:.7;background:var(--bg-dark);}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">Les Bains — Albi</a>
+  <div class="nav-links">
+    <a href="#concept">À propos</a>
+    <a href="#tarifs">Tarifs & accès</a>
+    <a href="#contact">Contact</a>
+    <a href="#tarifs" class="nav-cta">Réserver une session</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Les Bains — Albi</h1>
+    <p class="hero-sub">Votre refuge urbain pour récupérer, relâcher la pression et mieux dormir.<br>L'alternance bain froid et sauna, au cœur d'Albi.</p>
+    <p class="hero-sub" style="margin-top:-16px;font-size:13px;opacity:.7;">Ouverture septembre 2026</p>
+    <a href="#tarifs" class="hero-cta">Réserver une session</a>
+  </div>
+</section>
+
+<!-- MISSION — fond sombre -->
+<section class="section section-dark" id="concept">
+  <div class="section-inner" style="text-align:center;">
+    <p class="section-label">Notre mission</p>
+    <p class="mission-quote">"Proposer un allié santé accessible et performant au plus grand nombre"</p>
+    <div class="histoire-text">
+      <p>En Finlande, l'alternance sauna et eau froide existe depuis plus de 2 000 ans.</p>
+      <p>Aujourd'hui, la science confirme ce que les Scandinaves savaient déjà : le chaud-froid réduit les douleurs musculaires, améliore le sommeil et fait baisser le stress.</p>
+      <p>C'est ce rituel qu'on a voulu ramener à Albi.</p>
+      <p><strong>Tout est parti d'une rencontre au pied du Kilimandjaro.</strong></p>
+      <p>Une amitié née en Afrique, un voyage en Islande et la découverte des bains dans la Manche.</p>
+      <p>On a créé Les Bains pour que vous puissiez en profiter sans prendre l'avion.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LE SAUNA — split image + texte -->
+<div class="split bg-warm" id="saunas">
+  <div class="split-img">
+    <img src="sauna.png" alt="Sauna — Les Bains Albi" loading="lazy">
+  </div>
+  <div class="split-text">
+    <p class="section-label">Les saunas</p>
+    <h2>80°C pour relâcher vos tensions</h2>
+    <p>La chaleur dilate vos vaisseaux sanguins et détend vos muscles en profondeur.</p>
+    <p>Vos épaules se relâchent, votre dos se dénoue.</p>
+    <p>Après 15 minutes, vous sentez la tension de la journée qui s'évapore.</p>
+    <ul class="bienfaits">
+      <li>Relâchement musculaire profond</li>
+      <li>Élimination des toxines par la transpiration</li>
+      <li>Meilleure circulation sanguine</li>
+      <li>Renforcement immunitaire</li>
+      <li>Amélioration du sommeil</li>
+      <li>Réduction du stress</li>
+    </ul>
+  </div>
+</div>
+
+<!-- LES BAINS FROIDS — split inversé -->
+<div class="split reverse" id="bains">
+  <div class="split-img">
+    <img src="bain.png" alt="Bains froids — Les Bains Albi" loading="lazy">
+  </div>
+  <div class="split-text">
+    <p class="section-label">Les bains froids</p>
+    <h2>10 à 15°C pour décrocher vraiment</h2>
+    <p>L'eau est fraîche, pas glaciale — vous choisissez l'intensité qui vous convient.</p>
+    <p>Quand votre corps entre dans le bain, votre cerveau lâche prise.</p>
+    <p>Plus de to-do list, plus de notifications.</p>
+    <p>Juste vous, l'eau et le silence.</p>
+    <ul class="bienfaits">
+      <li>Récupération musculaire accélérée</li>
+      <li>Réduction de la fatigue nerveuse</li>
+      <li>Renforcement du système immunitaire</li>
+      <li>Meilleure circulation sanguine</li>
+      <li>Regain d'énergie immédiat</li>
+      <li>Clarté mentale</li>
+    </ul>
+  </div>
+</div>
+
+<!-- TARIFS -->
+<section class="section" id="tarifs">
+  <div class="section-inner" style="max-width:900px;">
+    <div style="text-align:center;">
+      <p class="section-label">Nos tarifs</p>
+      <h2>Une expérience accessible</h2>
+    </div>
+    <div class="tarifs-grid">
+      <div class="tarif-card">
+        <p class="tarif-name">Séance unitaire</p>
+        <p class="tarif-price">—</p>
+        <p class="tarif-desc">Une séance pour découvrir le rituel froid-chaud.</p>
+        <ul class="tarif-features">
+          <li>Accès sauna + bain froid</li>
+          <li>Serviettes incluses</li>
+          <li>Espace détente</li>
+          <li>Durée : environ 1h</li>
+        </ul>
+        <a href="#contact" class="tarif-btn outline">Réserver</a>
+      </div>
+      <div class="tarif-card featured">
+        <p class="tarif-name">Carnet 5 séances</p>
+        <p class="tarif-price">—</p>
+        <p class="tarif-desc">Pour ceux qui veulent en faire une habitude.</p>
+        <ul class="tarif-features">
+          <li>5 séances à utiliser librement</li>
+          <li>Accompagnement personnalisé</li>
+          <li>Accès sauna + bain froid</li>
+          <li>Serviettes incluses</li>
+          <li>Espace détente</li>
+        </ul>
+        <a href="#contact" class="tarif-btn">Nous contacter</a>
+      </div>
+      <div class="tarif-card">
+        <p class="tarif-name">Privatisation</p>
+        <p class="tarif-price">—</p>
+        <p class="tarif-desc">L'espace rien que pour vous, en groupe ou en duo.</p>
+        <ul class="tarif-features">
+          <li>Espace privatisé</li>
+          <li>Accès sauna + bain froid</li>
+          <li>Serviettes incluses</li>
+        </ul>
+        <a href="#contact" class="tarif-btn outline">Nous contacter</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCES -->
+<section class="section" style="background:var(--bg-warm);" id="acces">
+  <div class="section-inner" style="max-width:900px;">
+    <div style="text-align:center;margin-bottom:20px;">
+      <p class="section-label">Nous trouver</p>
+      <h2>Accès aux bains</h2>
+    </div>
+    <div class="acces-grid">
+      <div class="acces-info">
+        <div class="acces-item">
+          <span class="acces-item-icon">📍</span>
+          <p><strong>Adresse</strong>2 Rue René Princeteau<br>81000 Albi<br>À deux pas de la cathédrale Sainte-Cécile</p>
+        </div>
+        <div class="acces-item">
+          <span class="acces-item-icon">📞</span>
+          <p><strong>Téléphone</strong>+33 1 23 45 67 89</p>
+        </div>
+        <div class="acces-item">
+          <span class="acces-item-icon">📧</span>
+          <p><strong>Email</strong>contact@bains-albi.com</p>
+        </div>
+        <div class="horaires">
+          <p style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text);margin-bottom:12px;">Horaires</p>
+          <div class="horaires-row"><span>Lundi — Vendredi</span><span>9h00 — 19h00</span></div>
+          <div class="horaires-row"><span>Samedi</span><span>10h00 — 17h00</span></div>
+          <div class="horaires-row"><span>Dimanche</span><span>Fermé</span></div>
+        </div>
+      </div>
+      <div class="acces-map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2878.5!2d2.1488!3d43.9267!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDPCsDU1JzM2LjEiTiAywrAwOCc1NS43IkU!5e0!3m2!1sfr!2sfr!4v1" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NOUS ÉCRIRE -->
+<section class="section" id="contact">
+  <div class="section-inner" style="max-width:900px;">
+    <div style="text-align:center;margin-bottom:20px;">
+      <h2>Nous écrire</h2>
+      <p>Un message, une question.</p>
+    </div>
+    <div class="contact-grid">
+      <form class="contact-form" onsubmit="event.preventDefault();">
+        <label for="c-name">Prénom & Nom *</label>
+        <input type="text" id="c-name" required>
+        <label for="c-email">E-mail *</label>
+        <input type="email" id="c-email" required>
+        <label for="c-subject">Sujet</label>
+        <input type="text" id="c-subject">
+        <label for="c-message">Message *</label>
+        <textarea id="c-message" required></textarea>
+        <button type="submit">Envoyer</button>
+      </form>
+      <div class="contact-aside">
+        <div>
+          <strong>Email</strong>
+          <p><a href="mailto:contact@bains-albi.com">contact@bains-albi.com</a></p>
+        </div>
+        <div>
+          <strong>Disponibilité</strong>
+          <p>Réponse sous 48h</p>
+        </div>
+        <div>
+          <strong>Localisation</strong>
+          <p>2 Rue René Princeteau, 81000 Albi<br>À deux pas de la cathédrale Sainte-Cécile</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p class="footer-logo">Les Bains — Albi</p>
+  <div class="footer-links">
+    <a href="https://www.instagram.com/lesbains_albi/" target="_blank">Instagram</a>
+    <a href="#contact">Contact</a>
+    <a href="#concept">À propos</a>
+  </div>
+  <p>© 2026 Les Bains — Albi · Occitanie</p>
+</footer>
+
+<p class="legal">Les bénéfices mentionnés s'appuient sur des méta-analyses et revues systématiques publiées dans des journaux à comité de lecture. Les résultats varient selon les individus et l'intensité de la pratique. Ce service ne remplace pas un avis médical. Consultez un professionnel de santé avant toute immersion en eau froide si vous souffrez de troubles cardiovasculaires, d'hypertension ou d'autres pathologies.</p>
+
+<script>
+// Nav scroll effect
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+});
+</script>
+</body>
+</html>
